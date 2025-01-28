@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #f2f2f2;
+    height: 100%;
+    margin: auto;
+    align-items: flex-start; /* Aligne le contenu vers le haut */
+}
+
+.cv-container {
+    display: flex;
+    max-width: 210mm; /* Largeur d'une page A4 */
+    min-width: 210mm; /* Fixer la largeur au format A4 */
+    max-height: 297mm; /* Hauteur d'une page A4 */
+    min-height: 297mm; /* Fixer la hauteur au format A4 */
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-direction: row;
+    padding: 10px; /* Réduit l'espace global autour du contenu */
+    margin: 0 auto;
+    page-break-after: always;
+    margin-top: 0; /* Réduit l'espace en haut du CV */
+    margin-bottom: 0; /* Réduit l'espace en bas du CV */
+}
+
+.sidebar {
+    width: 230px;
+    background-color: #191919;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 0; /* Réduit l'espace en haut de la sidebar */
+}
+
+.profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid #0774bb;
+}
+
+.profile h1 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.title {
+    font-size: 14px;
+    color: #aaa;
+}
+
+.about, .contact-info, .languages, .expertise {
+    margin-bottom: 20px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.about h3, .languages h2, .contact-info p {
+    font-size: 14px;
+    color: #fff;
+}
+
+.languages ul, .expertise ul {
+    font-size: 12px;
+    color: #fff;
+    margin-left: 10px;
+    padding: 20px;
+    font-size: 15px;
+}
+
+.main-content {
+    width: 550px;
+    padding-top: 10px; /* Réduit l'espace au sommet de la section principale */
+    margin-bottom: 0; /* Réduit l'espace en bas de la section principale */
+}
+
+.experience, .education, .skills {
+    padding: 15px 0 0 45px;
+    margin: 5px 0;
+}
+
+section > h2 {
+    color: #fff;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    width: 200px;
+    border: 1px solid #043382;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: #0774bb;
+}
+
+.job, .school {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.job h3, .school h3 {
+    color: #191919;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.job p, .school p {
+    font-size: 12px;
+    color: #666;
+}
+
+.skills .skill {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 17px;
+    font-weight: bold;
+    color: #191919;
+
+}
+
+.skills .progress-bar {
+    flex-grow: 1;
+    height: 8px;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.skills .progress-bar div {
+    height: 100%;
+    background-color: #043382;
+    border-radius: 5px;
+}
+
+.rectangle {
+    height: 80px;
+    width: 100%;
+    margin: 20px 20px 0 0;
+    background-color: #043382;
+    text-align: center;
+    padding-top: 20px;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.icon-blue {
+    color: #0774bb;
+}
+
+.mg-5px {
+    margin-right: 5px;
+}

@@ -1,0 +1,40 @@
+/* Améliorez l'apparence des cartes */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #f7f7f7;
+    padding: 20px;
+}
+
+.card-body {
+    padding: 20px;
+    background-color: #7bae5d;
+}
+
+/* Liste d'informations utilisateur */
+.card-body ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.card-body ul li {
+    margin-bottom: 10px;
+}
+
+/* Amélioration des liens */
+a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hover effect on email link */
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}

@@ -1,0 +1,30 @@
+{% include 'trombi/header.html' %}
+{% load static %}
+
+<div id="content-wrapper" class="mt-4" style="padding-top:1% ;">
+
+    <div class="container-fluid">
+        <div class="card mb-2 col-md-12">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{% static 'img/1.png'%}" alt="">
+                    </div>
+                    <div class="col-md-7">
+                        <h1 class="text-primary">GENERE TON INCROYABLE CV </h1>
+                        <p class="welcome_text">Un moyen simple & Rapide de créer un nouveau CV puis générer en PDF</p>
+                        <a href="{% url 'connexion' %}"><button class="startBtn">Commencer</button></a>
+                        <br>
+                        <br>
+                        <br>
+                        {% include 'trombi/footer.html' %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

@@ -1,0 +1,158 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Template</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/new_cv.css' %}">
+</head>
+<body>
+    <div class="cv-container">
+        <div class="row">
+            <div class="col-md-4 left-section">
+                <!-- Section profil -->
+                <div class="text-center mb-4 ">
+                    <img src="profile.png" alt="Photo de profil" class="profile-image mb-3">
+                    <h1 class="name text-white text-center">BABY SIDY IBRAHIM</h1>
+                    <p class="text-white">25 ans</p>
+                    <div class="contact-info ">
+                        <a href="mailto:babysidyibrahim1@gmail.com" class="email-link  text-white ">babysidyibrahim1@gmail.com</a>
+                    </div>
+                    <div class="contact-info text-white mt-2">
+                        (+225) 07-59-84-75-63<br>
+                        (+225) 07-00-78-49-80
+                    </div>
+                </div>
+
+                <!-- Situation de famille -->
+                <div class="personal-details">
+                    <h3 class="mb-2 text-white personal-tag">SITUATION DE FAMILLE</h3>
+                    <span class="text-white">Célibataire sans enfant</span>
+                </div>
+
+                <!-- Nationalité -->
+                <div class="personal-details">
+                    <h3 class="mb-2 text-white personal-tag">NATIONALITÉ</h3><br>
+                    <span class="text-white">Ivoirienne</span>
+                </div>
+
+                <!-- Compétences -->
+                <div class="personal-details">
+                    <h3 class="mb-2 text-white personal-tag">COMPÉTENCES</h3>
+                    <ul class="competences-list">
+                        <li>Bonne capacité de rédaction</li>
+                        <li>Pédagogie</li>
+                        <li>Word</li>
+                        <li>Excel</li>
+                        <li>Ponctualité</li>
+                        <li>Assiduité</li>
+                    </ul>
+                </div>
+
+                <!-- Intérêts -->
+                <div class="personal-details">
+                    <h3 class="mb-2 text-white personal-tag">INTÉRÊTS</h3>
+                    <ul class="interets-list">
+                        <li>Voyage</li>
+                        <li>Lecture</li>
+                        <li>Sport</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="right-section">
+                    <!-- Expériences professionnelles -->
+                    <h2 class="section-title">EXPÉRIENCES PROFESSIONNELLES</h2>
+                    <div class="experience-item">
+                        <div class="experience-title">
+                            ENSEIGNANT DE PHILOSOPHIE
+                            <span class="experience-date">2022-2024</span>
+                        </div>
+                        <div>Collège Moderne de Gueyo</div>
+                        <div>Collège Académique les émérites de Gueyo</div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title">
+                            STAGIAIRE (ENSEIGNANT DE PHILOSOPHIE)
+                            <span class="experience-date">2021-2022</span>
+                        </div>
+                        <div>Lycée Moderne KFW de Gueyo</div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title">
+                            GESTIONNAIRE DE STOCKS
+                            <span class="experience-date">2020-2021</span>
+                        </div>
+                        <div>Quincaillerie ISSA & FRÈRES</div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title">
+                            GÉRANT DE POINT MOBILE MONEY
+                            <span class="experience-date">2019-2020</span>
+                        </div>
+                        <div>Inter Business World</div>
+                    </div>
+
+                    <!-- Éducation -->
+                    <h2 class="section-title mt-4">ÉDUCATIONS</h2>
+                    <div class="education-item">
+                        <div class="education-title">
+                            UNIVERSITÉ ALASSANE OUATTARA
+                            <span class="education-date">2024-2025</span>
+                        </div>
+                        <div>Doctorant en Philosophie</div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-title">
+                            UNIVERSITÉ ALASSANE OUATTARA
+                            <span class="education-date">2022-2023</span>
+                        </div>
+                        <div>Master en Philosophie</div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-title">
+                            UNIVERSITÉ ALASSANE OUATTARA
+                            <span class="education-date">2020-2021</span>
+                        </div>
+                        <div>Licence en Philosophie</div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-title">
+                            LYCÉE MODERNE KFW DE GUEYO
+                            <span class="education-date">2017-2018</span>
+                        </div>
+                        <div>BAC A2</div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-title">
+                            LYCÉE MODERNE KFW DE GUEYO
+                            <span class="education-date">2014-2015</span>
+                        </div>
+                        <div>BEPC</div>
+                    </div>
+
+                    <!-- Langues -->
+                    <h2 class="section-title mt-4">LANGUES</h2>
+                    <ul class="languages-list">
+                        <li>Français : Excellent</li>
+                        <li>Anglais : Niveau académique</li>
+                        <li>Espagnol : Niveau académique</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% include 'trombi/header.html' %}
+{% load static %}
+
+<body>
+    <div class="dashboard">
+        <div class="text-center mb-4">
+            <h1>TROMBINOSCOPE</h1>
+        </div>
+        
+        <div class="row justify-content-center">
+            {% for utilisateur in utilisateurs %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            {% if utilisateur.photo %}
+                                <img src="{{ utilisateur.photo.url }}" alt="{{ utilisateur.username }}" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+                            {% else %}
+                                <img src="{% static 'img/1.png' %}" alt="{{ utilisateur.username }}" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+                            {% endif %}
+                        </div>
+                        
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li><strong>Nom:</strong> <span style="color: black">{{ utilisateur.last_name }}</span></li>
+                                <li><strong>Prénom:</strong> <span style="color: black">{{ utilisateur.first_name }}</span></li>
+                                <li><strong>Contact:</strong> <span style="color: black">{{ utilisateur.telephone }}</span></li>
+                                <li><strong>Email:</strong> <a href="mailto:{{ utilisateur.email }}" style="color: #007bff;">{{ utilisateur.email }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+
+    {% include 'trombi/footer.html' %}
+</body>

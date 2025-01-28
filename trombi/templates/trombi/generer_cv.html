@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Template</title>
+    <link rel="stylesheet" href="{% static 'css/cv.css' %}">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <div class="cv-container">
+        <div class="sidebar">
+            <div class="profile">
+                {% if utilisateur.photo %}
+                <img src="{{ utilisateur.photo.url }}" alt="Profile Picture">
+                {% else %}
+                <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Picture">
+                {% endif %}
+            </div>
+
+            <div class="about">
+                <!-- <h3>À propos de moi</h3> -->
+                <!-- <p>{{ apropos }}</p> -->
+            </div>
+
+            <div class="contact-info">
+                <p><i class="bi bi-telephone-fill icon-blue mg-5px"></i> <span>Téléphone:</span> {{utilisateur.telephone }}</p><br>
+                <p><i class="bi bi-envelope-fill icon-blue mg-5px"></i><span>Email:</span> {{ utilisateur.email }}</p><br><br>
+            </div>
+
+            <div class="languages">
+                <h2>LANGUES</h2>
+                <ul>
+                    {% for langue in langues %}
+                    <li>{{ langue.libelle }} ({{ langue.niveau }})</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="expertise">
+                <!-- <h2>Compétences</h2>
+                <ul>
+                    {% for competence in competences %}
+                    <li>{{ competence.libelle }}  ({{ competence.niveau }})</li>
+                    {% endfor %}
+                </ul> -->
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="rectangle">
+                <h1>{{ utilisateur.first_name }} {{ utilisateur.last_name }}</h1>
+                <p class="title">{{ poste }}</p>
+            </div>
+
+            <section class="experience">
+                <h2>EXPERIENCES</h2>
+                {% for experience in experiences %}
+                <div class="job">
+                    <h3>{{ experience.poste }} - {{ experience.entreprise }}</h3>
+                    <p>{{ experience.annee_debut_exp }} - {% if experience.annee_fin_exp %}{{ experience.annee_fin_exp}}{% else %}Présent{% endif %}</p>
+                    <p>{{ experience.description }}</p>
+                </div><br>
+                {% endfor %}
+            </section>
+
+            <section class="education">
+                <h2>EDUCATIONS</h2>
+                {% for formation in formations %}
+                <div class="school">
+                    <h3>{{ formation.etablissement }}</h3>
+                    <p>{{ formation.diplome }}</p>
+                    <p>{{ formation.annee_debut_educ }} - {{ formation.annee_fin_educ }}</p>
+                </div><br>
+                {% endfor %}
+            </section>
+
+            <section class="skills">
+                <h2>COMPETENCES</h2>
+                <ul>
+                    {% for competence in competences %}
+                    <div class="skill">
+                        <p>{{ competence.libelle }} ({{ competence.niveau }})</p>
+                    </div>
+                    {% endfor %}
+                </ul>
+
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

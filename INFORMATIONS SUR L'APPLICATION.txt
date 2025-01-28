@@ -1,0 +1,33 @@
+NOM ET PRENOM : SIE N'GOUAN YVAN LOIC
+NUMERO CARTE ETUDIANT : CI0219053265
+
+------------GUIDE D'UTILISATION------------------
+
+- PAGE D'ACCEUIL DE L'APPLICATION : le trombinoscoop 
+- BOUTON INSCRIPTION : POUR AJOUTER UN UTILSATEUR
+- BOUTON CONNEXION : POUR SE CONNECTER AU DASHABOARD DE L'UTILISATEUR
+
+---------- APRES CONNEXION DANS LE DASHBOARD -------------
+
+( IL FAUT D'ABORD AJOUTER LES INFORMATIONS DE L'UTILISATEUR DANS "MON PROFILE" AVANT DE CREER SON CV)
+
+-"MON CV": cette partie est dédié a l'utilisateur pour qu'il puisse créer un cv a l'aide du bouton **CREER CV** 
+	       et visualiser tout ces cv créé afin de les modifiés, télécharger, supprimer et envoyer par email
+
+-"MON PROFILE" : Cette partie est dédié à l'utilisateur pour qu'il puisse ajouter ses informations 
+	             (LANGUES,EXPERIENCES,COMPETENCES,FORMATIONS)
+
+-"DECONNEXION" : pour se déconnecter au compte d'un utilisateur
+
+---------- LES DIFFERENTS ACCES DE L'APPLICATION -------------
+
+		***** UTILISATEURS*****
+
+email:sieyvan09@gmail.com et mot de passe : 1234
+email:loic@gmail.com et mot de passe : 1234
+email:konan@gmail.com et mot de passe : 1234
+
+**** COMPTE ADMIN******
+nom d'utilisateur : yvan
+mot de passe: 1234
+

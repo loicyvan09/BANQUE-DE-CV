@@ -1,0 +1,172 @@
+{% include 'trombi/header_user.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .card {
+        max-width: 300px;
+        margin: 10px auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-pink {
+        background-color: #ff007f;
+        color: white;
+    }
+
+    .btn-pink:hover {
+        background-color: #e60073;
+    }
+
+    .toggle-switch {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .flag-icon {
+        width: 24px;
+        height: auto;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .header h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .header h1 span {
+        color: #007bff;
+    }
+
+    .cv-preview {
+        flex-shrink: 0;
+        margin-right: 15px;
+        width: 80px;
+    }
+</style>
+
+<!-- SIDEBAR -->
+<section id="sidebar">
+    <a href="#" class="brand">
+        <i class='bx bxs-smile'></i>
+        <span class="text">BANQUE CV</span>
+    </a>
+    <ul class="side-menu top">
+        <!-- <li>
+            <a href="{% url 'profile' id=utilisateur.id %}">
+                <i class='bx bx-home'></i>
+                <span class="text">Dashboard </span>
+            </a>
+        </li> -->
+        <li class="active">
+            <a href="{% url 'cv' %}">
+                <i class='bx bx-archive'></i>
+                <span class="text">Mes CV</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'info' %}">
+                <i class='bx bx-user'></i>
+                <span class="text">Mon Profile</span>
+            </a>
+        </li>
+
+    </ul>
+    <ul class="side-menu">
+
+        <li>
+            <a href="{% url 'deconnexion' %}" class="logout">
+                <i class='bx bx-log-out'></i>
+                <span class="text">Déconnexion</span>
+            </a>
+        </li>
+    </ul>
+
+</section>
+<!-- CONTENT -->
+<section id="content">
+    <!-- NAVBAR -->
+    <nav>
+        <i class='bx bx-menu'></i>
+        <form action="#">
+            <div class="form-input">
+                <span style="color: black">Bienvenue {{utilisateur.last_name}}</span><!-- <input type="search" placeholder="Search..."> -->
+                <button type="submit"></i></button>
+            </div>
+        </form>
+        <input type="checkbox" id="switch-mode" hidden>
+        <label for="switch-mode" class="switch-mode"></label>
+
+        <a href="#" class="profile">
+            {% if utilisateur.photo %}
+            <img src="{{ utilisateur.photo.url }}" alt="{{ utilisateur.username }}" class="img-fluid rounded-circle">
+            {% else %}
+            <img src="{% static 'img/1.png' %}" alt="{{ utilisateur.username }}" class="img-fluid rounded-circle">
+            {% endif %}
+        </a>
+    </nav>
+    <!-- NAVBAR -->
+    <!-- CONTENT -->
+    <main>
+        <div class="head-title">
+            <div class="left">
+                <h1>CV</h1>
+            </div>
+            <a href="{% url 'cv1' %}" class="btn-download">
+                <i class='bx bxs-plus-square'></i><!-- <i class='bx bxs-file-pdf'></i> -->
+                <span class="text">CREER UN CV</span>
+            </a>
+        </div>
+    </main>
+    <div class="container">
+        <div class="row">
+            {% for cv in cvs %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="cv-preview text-center">
+                                <img src="{% static 'img/1.png' %}" alt="CV Preview" class="img-fluid rounded">
+                            </div>
+                            <h5 class="card-title text-center">{{ cv.titre }}</h5>
+                            <p class="card-text">{{ cv.description }}</p>
+                            <p class="text-muted text-center">
+                                {{ cv.utilisateur.first_name }} {{ cv.utilisateur.last_name }}
+                            </p>
+                            <div class="d-flex justify-content-center gap-2">
+                                <a href="{% url 'manage_cv' cv.id 'edit' %}" class="btn btn-warning">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a href="{% url 'manage_cv' cv.id 'download' %}" class="btn btn-primary">
+                                    <i class="bi bi-download"></i>
+                                </a>
+                                <a href="{% url 'manage_cv' cv.id 'delete' %}" class="btn btn-danger">
+                                    <i class='bx bxs-trash-alt'></i>
+                                </a>
+                                <a href="{% url 'send_cv_by_email' cv.id %}" class="btn btn-primary">
+                                    <i class='bx bx-envelope'></i>                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center">Vous n'avez pas encore créé de CV.</p>
+            {% endfor %}
+        </div>
+    </div>
+    
+    
+    
+</section>
+
+{% endblock content %}

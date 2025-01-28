@@ -1,0 +1,114 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Template</title>
+    <link rel="stylesheet" href="{% static 'css/cv.css' %}">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
+
+</head>
+<style>
+    .form-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    #btn_link_space {
+        text-decoration: none;
+    }
+</style>
+
+<body>
+    <form action="{% url 'generer_cv'  %}" method="POST">
+        {% csrf_token %}
+        <div class="form-buttons">
+            <!-- Bouton Valider -->
+            <button type="submit" class="btn btn-success">Valider</button>
+
+            <!-- Bouton Retour -->
+            <a href="{% url 'cv' %}" id="btn_link_space">
+                <button type="button" class="btn btn-secondary">Retour</button>
+            </a>
+        </div>
+        <div class="cv-container">
+            <div class="sidebar">
+                <div class="profile">
+                    <img src="{{ request.user.photo.url  }}" alt="Profile Picture">
+
+                </div>
+
+                <!-- <div class="about">
+                    <h3 class="">A propos de moi</h3>
+                    <textarea name="apropo" id=""></textarea>
+                </div> -->
+                <div class="contact-info">
+                    <p><i class="bi bi-telephone-fill icon-blue mg-5px"></i> <span>Phone:</span> {{request.user.telephone }}</p>
+                    <p><i class="bi bi-envelope-fill icon-blue mg-5px"></i><span>Email:</span> {{ request.user.email }}
+                    </p>
+                </div>
+                <div class="languages">
+                    <h2>LANGUES</h2>
+                    {% for langue in langues %}
+                    <label>
+                        <input type="checkbox" name="langues" value="{{ langue.id }}"> {{ langue.libelle }}
+                        ({{langue.niveau}})
+                    </label><br>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="main-content">
+                <div class="rectangle">
+                    {% if request.user.is_authenticated %}
+                    <p>{{ request.user.username }}</p>
+                    <p class="title"></p>
+                    {% endif %}
+                    <br>
+                    <!-- <p>Poste: <input type="text" name="poste"></p> -->
+                </div>
+                <section class="experience">
+                    <h2>EXPERIENCES</h2>
+                    {% for experience in experiences %}
+                    <label>
+                        <input type="checkbox" name="experiences" value="{{ experience.id }}">
+                        {{ experience.poste }} - {{ experience.entreprise }} ({{ experience.annee_debut_exp }} -
+                        {% if experience.annee_fin_exp %}{{ experience.annee_fin_exp }}{% else %}Présent{% endif %})
+                    </label><br>
+                    {% endfor %}
+                </section>
+                <section class="education">
+                    <h2>FORMATIONS</h2>
+                    {% for formation in formations %}
+                    <label>
+                        <input type="checkbox" name="formations" value="{{ formation.id }}">
+                        {{ formation.diplome }} - {{ formation.etablissement }} ({{ formation.annee_debut_educ }} -
+                        {{formation.annee_fin_educ }})
+                    </label><br>
+                    {% endfor %}
+                </section>
+                <section class="skills">
+                    <h2>COMPETENCES</h2>
+                    {% for competence in competences %}
+                    <label>
+                        <input type="checkbox" name="competences" value="{{ competence.id }}"> {{ competence.libelle }}
+                        (Niveau: {{ competence.niveau }})
+                    </label><br>
+                    {% endfor %}
+                </section>
+            </div>
+        </div>
+
+    </form>
+</body>
+
+</html>

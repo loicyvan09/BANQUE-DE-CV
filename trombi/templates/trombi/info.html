@@ -1,0 +1,525 @@
+{% include 'trombi/header_user.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .card {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 10px;
+
+    }
+
+    .btn-pink {
+        background-color: #ff007f;
+        color: white;
+    }
+
+    .btn-pink:hover {
+        background-color: #e60073;
+    }
+
+    .toggle-switch {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .flag-icon {
+        width: 24px;
+        height: auto;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .header h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .header h1 span {
+        color: #007bff;
+    }
+
+    .cv-preview {
+        flex-shrink: 0;
+        margin-right: 15px;
+    }
+
+    .modal-dialog-centered-custom {
+        max-width: 600px;
+        /* Définit la largeur maximale */
+        margin: auto;
+        /* Centre horizontalement */
+    }
+
+    .modal-content {
+        border-radius: 8px;
+        /* Optionnel : arrondir les coins */
+        padding: 20px;
+        /* Optionnel : ajouter du padding interne */
+    }
+</style>
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bxs-smile'></i>
+            <span class="text">BANQUE CV</span>
+        </a>
+        <ul class="side-menu top">
+            <!-- <li>
+                <a href="{% url 'profile' id=utilisateur.id %}">
+                    <i class='bx bx-home'></i>
+                    <span class="text">Dashboard </span>
+                </a>
+            </li> -->
+            <li class="#">
+                <a href="{% url 'cv' %}">
+                    <i class='bx bx-archive'></i>
+                    <span class="text">Mes CV</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="#">
+                    <i class='bx bx-user'></i>
+                    <span class="text">Mon Profile</span>
+                </a>
+            </li>
+            <!--<li>
+            <a href="#">
+                <i class='bx bxs-message-dots' ></i>
+                <span class="text">Message</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-group' ></i>
+                <span class="text">Team</span>
+            </a>
+        </li> -->
+        </ul>
+        <ul class="side-menu">
+            <!-- <li>
+            <a href="#">
+                <i class='bx bxs-cog' ></i>
+                <span class="text">Settings</span>
+            </a>
+        </li> -->
+            <li>
+                <a href="{% url 'deconnexion' %}" class="logout">
+                    <i class='bx bx-log-out'></i>
+                    <span class="text">Déconnexion</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu'></i>
+            <!-- <a href="#" class="nav-link">Categories</a> -->
+            <form action="#">
+                <div class="form-input">
+                    <span style="color: black">Bienvenue
+                        {{utilisateur.last_name}}</span><!-- <input type="search" placeholder="Search..."> -->
+                    <button type="submit"></i></button>
+                </div>
+            </form>
+            <input type="checkbox" id="switch-mode" hidden>
+            <label for="switch-mode" class="switch-mode"></label>
+            <!-- <a href="#" class="notification">
+            <i class='bx bxs-bell' ></i>
+            <span class="num">8</span>
+        </a> -->
+            <a href="#" class="profile">
+                {% if utilisateur.photo %}
+                <img src="{{ utilisateur.photo.url }}" alt="{{ utilisateur.username }}"
+                    class="img-fluid rounded-circle">
+                {% else %}
+                <img src="{% static 'img/1.png' %}" alt="{{ utilisateur.username }}" class="img-fluid rounded-circle">
+                {% endif %}
+            </a>
+        </nav>
+        <!-- NAVBAR -->
+
+
+
+        <!-- CONTENT -->
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Profile</h1>
+                </div>
+                {% if messages %}
+                {% for message in messages %}
+
+                <p class="text-success text-center" style="font-weight: bold;">{{ message }}</p>
+
+                {% endfor %}
+                {% endif %}
+                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                    <i class="bx bxs-plus-square"></i>
+                    <span class="text">Add mes infos</span>
+                </a>
+                
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered-custom">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{% url 'add_info' %}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+
+                                    <!-- Étape 1: Langues et Divers -->
+                                    <div class="form-step form-step-active" id="step1">
+                                        <h3 class="text-center mb-4">Langues et Divers</h3>
+                                        <div class="personal-info-section mb-4">
+                                            <h4 class="mb-3">Langues</h4>
+                                            <div id="languages-section">
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6">
+                                                        <label for="libelle_1" class="form-label">Langue :</label>
+                                                        <input type="text" name="libelle_langue[]" id="libelle_1"
+                                                            class="form-control" list="libelle_list">
+                                                        <datalist id="libelle_list">
+                                                            <option value="Anglais">
+                                                            <option value="Français">
+                                                            <option value="Espagnol">
+                                                            <option value="Allemand">
+                                                            <option value="Italien">
+                                                            <option value="Chinois">
+                                                        </datalist>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="niveau_1" class="form-label">Niveau :</label>
+                                                        <select name="niveau_langue[]" id="niveau_1"
+                                                            class="form-select">
+                                                            <option value="Debutant">Débutant</option>
+                                                            <option value="Intermediaire">Intermédiaire</option>
+                                                            <option value="Avance">Avancé</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-grid mb-4">
+                                                <button type="button" class="btn btn-secondary"
+                                                    onclick="addLanguageField()">Ajouter Langue</button>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="personal-info-section mb-4">
+                                            <h4 class="mb-3">Divers</h4>
+                                            <div class="mb-3" id="diver-section">
+                                                <label for="diver_1" class="form-label">Diver :</label>
+                                                <input type="text" name="divers[]" class="form-control" id="diver_1">
+                                            </div>
+                                            <div class="d-grid mb-4">
+                                                <button type="button" class="btn btn-secondary"
+                                                    onclick="addDiverField()">Ajouter Diver</button>
+                                            </div>
+                                        </div> -->
+                                        <div class="d-grid">
+                                            <button type="button" class="btn btn-primary btn-next"
+                                                onclick="nextStep(1)">Suivant</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Étape 2: Formation -->
+                                    <div class="form-step" id="step2" style="display:none;">
+                                        <h3>Formation</h3>
+                                        <div class="education-section" id="education-fields">
+                                            <div class="education-entry mb-3">
+                                                <label for="degree_1" class="form-label">Diplôme :</label>
+                                                <input type="text" name="diplome[]" class="form-control" id="degree_1">
+                                            </div>
+                                            <div class="education-entry mb-3">
+                                                <label for="institution_1" class="form-label">Etablissement :</label>
+                                                <input type="text" name="etablissement[]" class="form-control"
+                                                    id="institution_1">
+                                            </div>
+                                            <div class="education-entry mb-3">
+                                                <label for="year" class="form-label">Sélectionnez une année :</label>
+                                                <select name="annee_debut_educ[]" class="form-select">
+                                                    <script>
+                                                        for (let year = 1990; year <= 2025; year++) {
+                                                            document.write(`<option value="${year}">${year}</option>`);
+                                                        }
+                                                    </script>
+                                                </select>
+                                            </div>
+                                            <div class="education-entry mb-3">
+                                                <select name="annee_fin_educ[]" class="form-select">
+                                                    <script>
+                                                        for (let year = 1990; year <= 2025; year++) {
+                                                            document.write(`<option value="${year}">${year}</option>`);
+                                                        }
+                                                    </script>
+                                                </select>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                        <div class="d-grid mb-3">
+                                            <button type="button" class="btn btn-secondary"
+                                                onclick="addEducationField()">Ajouter une formation</button>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary btn-prev"
+                                                onclick="prevStep(2)">Retour</button>
+                                            <button type="button" class="btn btn-primary btn-next"
+                                                onclick="nextStep(2)">Suivant</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Étape 3: Expérience -->
+                                    <div class="form-step" id="step3" style="display:none;">
+                                        <h3>Expérience professionnelle</h3>
+                                        <div class="experience-section" id="experience-fields">
+                                            <div class="experience-entry mb-3">
+                                                <label for="job_title_1" class="form-label">Titre du poste :</label>
+                                                <input type="text" name="poste[]" class="form-control" id="job_title_1">
+                                            </div>
+                                            <div class="experience-entry mb-3">
+                                                <label for="company_1" class="form-label">Entreprise :</label>
+                                                <input type="text" name="entreprise[]" class="form-control"
+                                                    id="company_1">
+                                            </div>
+                                            <div class="experience-entry mb-3">
+                                                <label for="company_2" class="form-label">Année Début :</label>
+                                                <input type="date" name="annee_debut_exp[]" class="form-control"
+                                                    id="company_2">
+                                            </div>
+                                            <div class="experience-entry mb-3">
+                                                <label for="company_3" class="form-label">Année Fin :</label>
+                                                <input type="date" name="annee_fin_exp[]" class="form-control"
+                                                    id="company_3">
+                                            </div>
+                                            <hr>
+                                        </div>
+                                        <div class="d-grid mb-3">
+                                            <button type="button" class="btn btn-secondary"
+                                                onclick="addExperienceField()">Ajouter une expérience</button>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary btn-prev"
+                                                onclick="prevStep(3)">Retour</button>
+                                            <button type="button" class="btn btn-primary btn-next"
+                                                onclick="nextStep(3)">Suivant</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-step" id="step4" style="display:none;">
+                                        <h3 class="text-center mb-4">Compétences</h3>
+
+                                        <div class="competences-section " id="competences-fields">
+                                            <div class="row mb-3">
+                                                <div class="competences-entry col-md-6">
+                                                    <label for="competence_1" class="form-label">Compétence :</label>
+                                                    <input type="text" name="competence[]" class="form-control"
+                                                        id="competence_1" list="libelle_list1">
+                                                    <datalist id="libelle_list1">
+
+                                                    </datalist>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="niveau_1" class="form-label">Niveau :</label>
+                                                    <select name="niveau_competence[]" id="niveau_1"
+                                                        class="form-select">
+                                                        <option value="Debutant">Débutant</option>
+                                                        <option value="Intermediaire">Intermédiaire</option>
+                                                        <option value="Avance">Avancé</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+
+                                        <div class="d-grid mb-4">
+                                            <button type="button" class="btn btn-secondary"
+                                                onclick="addCompetenceField()">Ajouter
+                                                compétence</button>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary"
+                                                onclick="prevStep(4)">Retour</button>
+                                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function showStep(step) {
+                    document.querySelectorAll('.form-step').forEach((stepDiv, index) => {
+                        stepDiv.style.display = index + 1 === step ? 'block' : 'none';
+                    });
+                }
+
+                function nextStep(step) {
+                    showStep(step + 1);
+                }
+
+                function prevStep(step) {
+                    showStep(step - 1);
+                }
+
+
+                function addField(sectionId, inputClass) {
+                    const section = document.getElementById(sectionId);
+                    const newField = section.firstElementChild.cloneNode(true);
+
+                    // Réinitialisation des valeurs des champs clonés
+                    newField.querySelectorAll("input, select").forEach(input => {
+                        input.value = "";
+                        if (input.hasAttribute("id")) {
+                            input.id = input.id + "_" + Date.now(); // Ajout d'un identifiant unique
+                        }
+                    });
+
+                    section.appendChild(newField);
+                }
+
+                // Ajout dynamique des champs
+                function addLanguageField() { addField("languages-section", "row"); }
+                // Ajout d'une formation
+                function addEducationField() {
+                    const educationSection = document.getElementById("education-fields");
+                    const uniqueId = Date.now();
+
+                    const newEducationEntry = document.createElement("div");
+                    newEducationEntry.classList.add("education-entry", "mb-3");
+                    newEducationEntry.id = `education-${uniqueId}`;
+
+                    newEducationEntry.innerHTML = `
+                    <label class="form-label">Diplôme :</label>
+                    <input type="text" name="diplome[]" class="form-control">
+
+                    <label class="form-label">Établissement :</label>
+                    <input type="text" name="etablissement[]" class="form-control">
+
+                    <label class="form-label">Année de début :</label>
+                    <select name="annee_debut_educ[]" class="form-select">${generateYearOptions()}</select>
+
+                    <label class="form-label">Année de fin :</label>
+                    <select name="annee_fin_educ[]" class="form-select">${generateYearOptions()}</select>
+
+                    <button type="button" class="btn btn-danger mt-2" onclick="removeField('education-${uniqueId}')">Supprimer</button>
+
+                    <hr>
+                `;
+
+                    educationSection.appendChild(newEducationEntry);
+                }
+
+                // Ajout d'une expérience professionnelle
+                function addExperienceField() {
+                    const experienceSection = document.getElementById("experience-fields");
+                    const uniqueId = Date.now();
+
+                    const newExperienceEntry = document.createElement("div");
+                    newExperienceEntry.classList.add("experience-entry", "mb-3");
+                    newExperienceEntry.id = `experience-${uniqueId}`;
+
+                    newExperienceEntry.innerHTML = `
+                    <label class="form-label">Titre du poste :</label>
+                    <input type="text" name="poste[]" class="form-control">
+
+                    <label class="form-label">Entreprise :</label>
+                    <input type="text" name="entreprise[]" class="form-control">
+
+                    <label class="form-label">Année Début :</label>
+                    <input type="date" name="annee_debut_exp[]" class="form-control">
+
+                    <label class="form-label">Année Fin :</label>
+                    <input type="date" name="annee_fin_exp[]" class="form-control">
+
+                    <button type="button" class="btn btn-danger mt-2" onclick="removeField('experience-${uniqueId}')">Supprimer</button>
+
+                    <hr>
+                `;
+
+                    experienceSection.appendChild(newExperienceEntry);
+                }
+
+                // Ajout d'une compétence
+                function addCompetenceField() {
+                    const competenceSection = document.getElementById("competences-fields");
+                    const uniqueId = Date.now();
+
+                    const newCompetenceEntry = document.createElement("div");
+                    newCompetenceEntry.classList.add("competences-entry", "mb-3");
+                    newCompetenceEntry.id = `competence-${uniqueId}`;
+
+                    newCompetenceEntry.innerHTML = `
+                    <div class="row mb-3">
+                    <div class="competences-entry col-md-6">
+                        <label for="competence_1" class="form-label">Compétence :</label>
+                        <input type="text" name="competence[]" class="form-control"
+                            id="competence_1" list="libelle_list1">
+                        <datalist id="libelle_list1">
+
+                        </datalist>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <label for="niveau_1" class="form-label">Niveau :</label>
+                        <select name="niveau_competence[]" id="niveau_1" class="form-select">
+                            <option value="Debutant">Débutant</option>
+                            <option value="Intermediaire">Intermédiaire</option>
+                            <option value="Avance">Avancé</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-danger mt-2" onclick="removeField('competence-${uniqueId}')">Supprimer</button>
+                <hr>
+                `;
+
+                    competenceSection.appendChild(newCompetenceEntry);
+                }
+
+                // Fonction pour générer les options d'années
+                function generateYearOptions() {
+                    let options = "";
+                    for (let year = 1990; year <= 2025; year++) {
+                        options += `<option value="${year}">${year}</option>`;
+                    }
+                    return options;
+                }
+
+                // Fonction générique pour supprimer un champ
+                function removeField(id) {
+                    const fieldToRemove = document.getElementById(id);
+                    if (fieldToRemove) {
+                        fieldToRemove.remove();
+                    }
+                }
+            </script>
+        </main>
+
+        {% endblock content %}

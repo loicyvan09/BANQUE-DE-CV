@@ -1,0 +1,128 @@
+body {
+    background-color: #4a4a4a;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+.cv-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    background-color: #4a4a4a;
+    padding: 2rem;
+}
+
+.profile-section {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 8px solid #fff;
+    background-color: #f8d948;
+}
+
+.personal-info {
+    color: white;
+    margin-left: 2rem;
+}
+
+.name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info {
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    background-color: white;
+    color: #c25e1d;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #c25e1d;
+}
+
+.personal-details {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.personal-tag {
+    background-color: #c25e1d;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.competences-list, .interets-list {
+    list-style: none;
+    padding-left: 0;
+    color: white;
+}
+
+.competences-list li, .interets-list li {
+    margin-bottom: 0.5rem;
+}
+
+.competences-list li::before, .interets-list li::before {
+    content: "•";
+    color: white;
+    margin-right: 0.5rem;
+}
+
+.right-section {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 5px;
+}
+.left-section{
+    text-align: left;
+}
+
+.experience-item, .education-item {
+    margin-bottom: 1.5rem;
+}
+
+.experience-title, .education-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.experience-date, .education-date {
+    color: #c25e1d;
+    font-weight: bold;
+    float: right;
+}
+
+.languages-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.languages-list li::before {
+    content: "•";
+    color: #c25e1d;
+    margin-right: 0.5rem;
+}
+
+.email-link {
+    color: #c25e1d;
+    text-decoration: none;
+    text-align: left;
+}
+.personal-details, .contact-info, .competences-list, .interets-list {
+    text-align: left; /* Assure l'alignement à gauche des sous-sections */
+}
+
